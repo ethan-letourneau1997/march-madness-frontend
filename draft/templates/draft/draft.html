@@ -1,0 +1,57 @@
+{% extends 'draft/layout.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    <h1> {{ group.name }} Draft</h1>
+{% endblock title %}
+
+{% block body %}
+
+<div class="container draft-container text-center">
+    
+    <p class="draft-day-announcement">It's draft day for <span class="accent">{{ group.name }}</span> !</p>
+    <p class="round shadow"> Round {{ round }} </p>
+    <p class="player-title">
+        <span class="accent">
+            {{ current_turn.name }}
+        </span>: Choose a player!
+    </p>
+
+    <div class="row">
+        <div class="col form-col d-flex justify-content-center">
+                {% crispy select %}
+        </div>  
+    </div>
+    <div class="row">
+        <div class="wrapper">
+        {% for person in draft_order %}
+            <div>
+                <div class="card draft-card shadow">
+                    {% if person.name == current_turn.name %}
+                        <div class="card-header active-header">
+                            <p>{{person}}</p>
+                        </div>   
+                    {% else %}
+                        <div class="card-header">
+                            <p>{{person}}</p>
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <ol>
+                            {% for player in person.players.all %}
+                                <li> {{ player.name }} </li>  
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock body %}

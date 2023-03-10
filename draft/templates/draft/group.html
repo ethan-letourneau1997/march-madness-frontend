@@ -1,0 +1,32 @@
+{% extends 'draft/layout.html' %}
+
+{% block title %}
+    <h1> {{ group.name }} </h1>
+{% endblock title %}
+
+
+{% block body %}
+<div class="container group-container">
+    <div class="row text-center">
+        <span>Here is your group!</span>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-10 col-md-8 col-lg-4 group-draft-order-col  shadow">
+            <h4>Draft Order</h4>
+                <ol>
+                {% for person in draft_order %}
+                    <li>{{ person.name }}</li> 
+                {% endfor %}
+                </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+             <div class="d-flex justify-content-center">
+                <a class="btn btn-lg btn-outline-danger shadow" href="{% url 'draft' group.id %}">Go To Draft</a>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock body %}

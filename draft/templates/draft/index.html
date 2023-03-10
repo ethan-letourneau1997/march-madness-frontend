@@ -1,0 +1,89 @@
+{% extends 'draft/layout.html' %}
+{% load my_filters %}
+
+{% block title %}
+    <h1>MARCH MADNESS</h1>
+{% endblock title %}
+
+{% block body %}
+
+<div class="container-fluid index-container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">All Groups</button>
+        </li>
+        {% for group in groups %}
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="{{ group.name|replace_spaces_with_hyphens }}-tab" data-bs-toggle="tab" data-bs-target="#{{ group.name|replace_spaces_with_hyphens }}" type="button" role="tab" aria-controls="#{{ group.name|replace_spaces_with_hyphens }}" aria-selected="false">{{ group }}</button>
+        </li>
+        {% endfor %}
+    </ul> 
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="container-fluid">
+                <div class="row">
+                    {% for person in people|sort_by_total_points %}
+                        <div class="col col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card shadow">
+                                <div class="card-header">
+                                    <span class="d-flex justify-content-center"> {{ person.name }} </span>
+                                </div>
+                                {% for player in person.players.all %}
+                                    <ul class="list-group list-group-flush">
+                                            <li class="list-group-item d-flex justify-content-between {% cycle 'even' 'odd' %}{% if player.team_id.knocked_out %} knocked_out{% endif %}">
+                                                <span>{{ player }}</span>
+                                                <span>{{ player.points }}</span>
+                                            </li>
+                                    {% endfor %}
+                                    </ul>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between total-row point-total">
+                                        <span scope="row">Total Points: </span>
+                                        <span>{{ person.total_points }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                </div>
+        </div>
+        {% for group in groups %}
+            <div class="tab-pane fade" id="{{ group.name|replace_spaces_with_hyphens }}" role="tabpanel" aria-labelledby="{{group}}-tab">
+                <div class="container-fluid">
+                    <div class="row">
+                    {% if group.peoples.all %}
+                        {% for person in group.peoples.all|sort_by_total_points %}
+                            <div class="col col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="card shadow">
+                                    <div class="card-header">
+                                        <span class="d-flex justify-content-center"> {{ person.name }} </span>
+                                    </div>
+                                    {% for player in person.players.all %}
+                                    <ul class="list-group list-group-flush">
+                                            <li class="list-group-item d-flex justify-content-between {% cycle 'even' 'odd' %}{% if player.team_id.knocked_out %} knocked_out{% endif %}">
+                                                <span>{{ player }}</span>
+                                                <span>{{ player.points }}</span>
+                                            </li>
+                                    {% endfor %}
+                                    </ul>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between total-row point-total">
+                                            <span scope="row">Total Points: </span>
+                                            <span>{{ person.total_points }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                            <p>No people found for this group</p>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+        
+{% endblock body %}
