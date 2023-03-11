@@ -35,12 +35,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'draft',
-    'tailwind',
-    'theme',
-    'django_browser_reload',
     'crispy_forms',
     'crispy_bootstrap5',
+    'draft',
     'draft.templatetags',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -146,8 +143,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATICFILES_DIRS = [BASE_DIR / "draft/static",
-                    BASE_DIR / "theme/static_src/src"]
+STATICFILES_DIRS = [BASE_DIR / "draft/static"]
 
 
 # Default primary key field type
@@ -155,9 +151,10 @@ STATICFILES_DIRS = [BASE_DIR / "draft/static",
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Register tailwind theme app
-TAILWIND_APP_NAME = 'theme'
 
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+STATICFILES_FINDERS = ['django.contrib.staticfiles.finders.FileSystemFinder',
+                       'django.contrib.staticfiles.finders.AppDirectoriesFinder',]
