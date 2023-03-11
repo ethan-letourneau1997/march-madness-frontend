@@ -3,16 +3,97 @@
 
 {% block title %}
     <h1 class="col">NEW DRAFT</h1>
+
+    </div>
 {% endblock title %}
 
 {% block body %}
- <div class="container new-draft-container">
+<div class="container new-draft-container pb-4">
     <div class="row d-flex justify-content-center">
         <div class="col-10 col-lg-8 col-xl-6">
-            {% crispy form %}
+            {% comment %} {% crispy form %} {% endcomment %}
+        <form action="new_draft" method="post">
+            
+            {% csrf_token %}
+            <div class="row">
+                <div class="col">
+                    <p class="text-center">Choose a name for your group</p>
+                    <div class="form-floating mb-3">
+                        {{ form.group_name }}
+                        <label for="floatingGroup">Group Name</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p class="text-center">Add up to 10 group members</p>
+                </div>
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        {{form.member_1}}
+                        <label for="floatingMember1">Member 1</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-floating mb-3">
+                        {{form.member_2}}
+                        <label for="floatingMember2">Member 2</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-floating mb-3">
+                        {{form.member_3}}
+                        <label for="floatingMember3">Member 3</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-floating mb-3">
+                        {{form.member_4}}
+                        <label for="floatingMember4">Member 4</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-floating mb-3">
+                        {{form.member_5}}
+                        <label for="floatingMember5">Member 5</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-floating mb-3">
+                        {{form.member_6}}
+                        <label for="floatingMember6">Member 6</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-floating mb-3">
+                        {{form.member_7}}
+                        <label for="floatingMember7">Member 7</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-floating mb-3">
+                        {{form.member_8}}
+                        <label for="floatingMember8">Member 8</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-floating mb-3">
+                        {{form.member_9}}
+                        <label for="floatingMember9">Member 9</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-floating mb-3">
+                        {{form.member_10}}
+                        <label for="floatingMember10">Member 10</label>
+                    </div>
+                </div>
+            </div>    
+            <input class="btn btn-dark" type="submit" value="Submit">  
+        </form>
+            
         </div>
     </div>
-    
 </div> 
 
 

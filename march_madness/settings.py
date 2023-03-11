@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,6 +37,8 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'draft',
     'tailwind',
+    'theme',
+    'django_browser_reload',
     'crispy_forms',
     'crispy_bootstrap5',
     'draft.templatetags',
@@ -141,10 +146,18 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATICFILES_DIRS = [BASE_DIR / "draft/static"]
+STATICFILES_DIRS = [BASE_DIR / "draft/static",
+                    BASE_DIR / "theme/static_src/src"]
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Register tailwind theme app
+TAILWIND_APP_NAME = 'theme'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

@@ -14,6 +14,63 @@ from django.forms import formset_factory
 from .models import People, Player
 
 
+class newGroupForm(forms.Form):
+    group_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={'id': 'floatingName', 'class': 'form-control', 'placeholder': 'group'})
+    )
+    member_1 = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'id': 'floatingMember1', 'class': 'form-control', 'placeholder': 'member1'})
+    )
+    member_2 = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'id': 'floatingMember2', 'class': 'form-control', 'placeholder': 'group member 2'})
+    )
+    member_3 = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'id': 'floatingMember3', 'class': 'form-control', 'placeholder': 'member 3'})
+    )
+    member_4 = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'id': 'floatingMember4', 'class': 'form-control', 'placeholder': 'member 4'})
+    )
+    member_5 = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'id': 'floatingMember5', 'class': 'form-control', 'placeholder': 'member1'})
+    )
+    member_6 = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'id': 'floatingMember6', 'class': 'form-control', 'placeholder': 'member1'})
+    )
+    member_7 = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'id': 'floatingMember7', 'class': 'form-control', 'placeholder': 'member1'})
+    )
+    member_8 = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'id': 'floatingMember8', 'class': 'form-control', 'placeholder': 'member1'})
+    )
+    member_9 = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'id': 'floatingMember9', 'class': 'form-control', 'placeholder': 'member9'})
+    )
+    member_10 = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'id': 'floatingMember10', 'class': 'form-control', 'placeholder': 'member10'})
+    )
+
+
 class GroupForm(forms.Form):
 
     group_name = forms.CharField()

@@ -5,7 +5,7 @@ from django import forms
 from django.forms import IntegerField
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import GroupForm, PlayerSelectForm
+from .forms import GroupForm, PlayerSelectForm, newGroupForm
 from .models import Group, People, Team, Player
 
 
@@ -15,15 +15,24 @@ TIMEOUT = datetime.timedelta(seconds=300)
 # Create your views here.
 
 def index(request):
+    people = People.objects.prefetch_related(
+        'players', 'players__team_id'
+    ).all()
+    groups = Group.objects.prefetch_related(
+        'peoples', 'peoples__players', 'peoples__players__team_id'
+    ).all()
+
     return render(request, "draft/index.html", {
-        'people': People.objects.all(),
-        'groups': Group.objects.all()
+        # 'people': People.objects.all(),
+        # 'groups': Group.objects.all(),
+        'people': people,
+        'groups': groups,
     })
 
 
 def new_draft(request):
     if request.method == 'POST':
-        form = GroupForm(request.POST)
+        form = newGroupForm(request.POST)
         if form.is_valid():
             # create new Group instance and save it
             group = Group.objects.create(name=form.cleaned_data['group_name'])
@@ -56,10 +65,50 @@ def new_draft(request):
             # Redirect to a success page
             return redirect('group', group_id=group.id)
     context = {
-        'form': GroupForm(),
+        'form': newGroupForm(),
         'groups': Group.objects.all()
     }
     return render(request, "draft/new_draft.html", context)
+
+# def new_draft(request):
+#     if request.method == 'POST':
+#         form = GroupForm(request.POST)
+#         if form.is_valid():
+#             # create new Group instance and save it
+#             group = Group.objects.create(name=form.cleaned_data['group_name'])
+
+#             # Create array to store the draft order
+#             draft_order = []
+
+#             # Create a new People instance for each member and save it
+#             for i in range(1, 11):
+#                 member_name = form.cleaned_data.get(f"member_{i}")
+#                 if member_name:
+#                     # Create member
+#                     People.objects.create(name=member_name, group_id=group)
+
+#                     # Add member ID to draft_order
+#                     member_id = People.objects.get(name=member_name).id
+#                     draft_order.append(member_id)
+#                     print(f'draft order{draft_order}')
+
+#             # Randomize draft order
+#             random.shuffle(draft_order)
+
+#             # Set snake draft by adding reverse order
+#             draft_order = draft_order + draft_order[::-1]
+
+#             # Add draft order to list
+#             group.draft_order = draft_order
+#             group.save()
+
+#             # Redirect to a success page
+#             return redirect('group', group_id=group.id)
+#     context = {
+#         'form': GroupForm(),
+#         'groups': Group.objects.all()
+#     }
+#     return render(request, "draft/new_draft.html", context)
 
 
 def group(request, group_id):
