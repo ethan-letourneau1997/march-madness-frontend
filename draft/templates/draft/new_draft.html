@@ -12,8 +12,7 @@
     <div class="row d-flex justify-content-center">
         <div class="col-10 col-lg-8 col-xl-6">
             {% comment %} {% crispy form %} {% endcomment %}
-        <form action="new_draft" method="post">
-            
+        <form action="new_draft" method="post">      
             {% csrf_token %}
             <div class="row">
                 <div class="col">
@@ -21,72 +20,171 @@
                     <div class="form-floating mb-3">
                         {{ form.group_name }}
                         <label for="floatingGroup">Group Name</label>
+                        {% if form_errors %}
+                            {% for field_name, field_errors in form_errors.items %}
+                                {% if field_name == 'group_name' %}
+                                    {% for error in field_errors %}
+                                        <p class="alert alert-danger">{{ error }}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <p class="text-center">Add up to 10 group members</p>
+                    <p class="text-center mb-3">Add up to 10 group members</p>
                 </div>
                 <div class="col">
-                    <div class="form-floating mb-3">
+                    <div class="form-floating">
                         {{form.member_1}}
                         <label for="floatingMember1">Member 1</label>
                     </div>
+                    {% if form_errors %}
+                        {% for field_name, field_errors in form_errors.items %}
+                            {% if field_name == 'member_1' %}
+                                {% for error in field_errors %}
+                                    <p class="alert alert-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-floating mb-3">
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="form-floating ">
                         {{form.member_2}}
                         <label for="floatingMember2">Member 2</label>
                     </div>
+                    {% if form_errors %}
+                        {% for field_name, field_errors in form_errors.items %}
+                            {% if field_name == 'member_2' %}
+                                {% for error in field_errors %}
+                                    <p class="alert alert-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-floating mb-3">
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="form-floating ">
                         {{form.member_3}}
                         <label for="floatingMember3">Member 3</label>
                     </div>
+                    {% if form_errors %}
+                        {% for field_name, field_errors in form_errors.items %}
+                            {% if field_name == 'member_3' %}
+                                {% for error in field_errors %}
+                                    <p class="alert alert-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-floating mb-3">
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="form-floating">
                         {{form.member_4}}
                         <label for="floatingMember4">Member 4</label>
                     </div>
+                    {% if form_errors %}
+                        {% for field_name, field_errors in form_errors.items %}
+                            {% if field_name == 'member_4' %}
+                                {% for error in field_errors %}
+                                    <p class="alert alert-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-floating mb-3">
+                <div class="col-12 col-md-6 ">
+                    <div class="form-floating ">
                         {{form.member_5}}
                         <label for="floatingMember5">Member 5</label>
                     </div>
+                    {% if form_errors %}
+                        {% for field_name, field_errors in form_errors.items %}
+                            {% if field_name == 'member_5' %}
+                                {% for error in field_errors %}
+                                    <p class="alert alert-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-floating mb-3">
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="form-floating ">
                         {{form.member_6}}
                         <label for="floatingMember6">Member 6</label>
                     </div>
+                    {% if form_errors %}
+                        {% for field_name, field_errors in form_errors.items %}
+                            {% if field_name == 'member_6' %}
+                                {% for error in field_errors %}
+                                    <p class="alert alert-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-floating mb-3">
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="form-floating">
                         {{form.member_7}}
                         <label for="floatingMember7">Member 7</label>
                     </div>
+                    {% if form_errors %}
+                        {% for field_name, field_errors in form_errors.items %}
+                            {% if field_name == 'member_7' %}
+                                {% for error in field_errors %}
+                                    <p class="alert alert-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-floating mb-3">
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="form-floating">
                         {{form.member_8}}
                         <label for="floatingMember8">Member 8</label>
                     </div>
+                    {% if form_errors %}
+                        {% for field_name, field_errors in form_errors.items %}
+                            {% if field_name == 'member_8' %}
+                                {% for error in field_errors %}
+                                    <p class="alert alert-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-floating mb-3">
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="form-floating">
                         {{form.member_9}}
                         <label for="floatingMember9">Member 9</label>
                     </div>
+                    {% if form_errors %}
+                        {% for field_name, field_errors in form_errors.items %}
+                            {% if field_name == 'member_9' %}
+                                {% for error in field_errors %}
+                                    <p class="alert alert-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-floating mb-3">
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="form-floating">
                         {{form.member_10}}
                         <label for="floatingMember10">Member 10</label>
                     </div>
+                    {% if form_errors %}
+                        {% for field_name, field_errors in form_errors.items %}
+                            {% if field_name == 'member_10' %}
+                                {% for error in field_errors %}
+                                    <p class="alert alert-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>    
             <input class="btn btn-outline-danger btn-lg mx-auto d-block w-100 mt-2" type="submit" value="Submit">  

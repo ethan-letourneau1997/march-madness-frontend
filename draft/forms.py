@@ -1,16 +1,16 @@
 from .models import Team, Player
-from crispy_forms.layout import Layout, Field, Fieldset, ButtonHolder, Submit, Div
+from crispy_forms.layout import Layout, Submit
 from datetime import datetime
 from django import forms
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.urls import reverse_lazy
 from crispy_forms.helper import FormHelper
 from crispy_forms.bootstrap import FormActions
-from crispy_forms.layout import Layout, Submit, Row, Column, HTML, ButtonHolder, Field, Fieldset, Div, Button
+from crispy_forms.layout import Layout, Submit, Row
 from django.forms import formset_factory
-# from django_select2.forms import Select2Widget
 
-from .models import People, Player
+
+from .models import People, Player, Group
 
 
 class newGroupForm(forms.Form):
@@ -68,6 +68,94 @@ class newGroupForm(forms.Form):
         widget=forms.TextInput(
             attrs={'id': 'floatingMember10', 'class': 'form-control', 'placeholder': 'member10'})
     )
+
+    def clean_group_name(self):
+        group_name = self.cleaned_data.get('group_name')
+        # use "iexact" for case-insensitive matching
+        if Group.objects.filter(name__iexact=group_name).exists():
+            raise forms.ValidationError(
+                "A group with this name already exists.")
+        return group_name
+
+    def clean_member_1(self):
+        member = self.cleaned_data.get('member_1')
+        if member:
+            if People.objects.filter(name__iexact=member).exists():
+                raise forms.ValidationError(
+                    "A group with this name already exists.")
+        return member
+
+    def clean_member_2(self):
+        member = self.cleaned_data.get('member_2')
+        if member:
+            if People.objects.filter(name__iexact=member).exists():
+                raise forms.ValidationError(
+                    "A group with this name already exists.")
+        return member
+
+    def clean_member_3(self):
+        member = self.cleaned_data.get('member_3')
+        if member:
+            if People.objects.filter(name__iexact=member).exists():
+                raise forms.ValidationError(
+                    "A group with this name already exists.")
+        return member
+
+    def clean_member_4(self):
+        member = self.cleaned_data.get('member_4')
+        if member:
+            if People.objects.filter(name__iexact=member).exists():
+                raise forms.ValidationError(
+                    "A group with this name already exists.")
+        return member
+
+    def clean_member_5(self):
+        member = self.cleaned_data.get('member_5')
+        if member:
+            if People.objects.filter(name__iexact=member).exists():
+                raise forms.ValidationError(
+                    "A group with this name already exists.")
+        return member
+
+    def clean_member_6(self):
+        member = self.cleaned_data.get('member_6')
+        if member:
+            if People.objects.filter(name__iexact=member).exists():
+                raise forms.ValidationError(
+                    "A group with this name already exists.")
+        return member
+
+    def clean_member_7(self):
+        member = self.cleaned_data.get('member_7')
+        if member:
+            if People.objects.filter(name__iexact=member).exists():
+                raise forms.ValidationError(
+                    "A group with this name already exists.")
+        return member
+
+    def clean_member_8(self):
+        member = self.cleaned_data.get('member_8')
+        if member:
+            if People.objects.filter(name__iexact=member).exists():
+                raise forms.ValidationError(
+                    "A group with this name already exists.")
+        return member
+
+    def clean_member_9(self):
+        member = self.cleaned_data.get('member_9')
+        if member:
+            if People.objects.filter(name__iexact=member).exists():
+                raise forms.ValidationError(
+                    "A group with this name already exists.")
+        return member
+
+    def clean_member_10(self):
+        member = self.cleaned_data.get('member_10')
+        if member:
+            if People.objects.filter(name__iexact=member).exists():
+                raise forms.ValidationError(
+                    "A group with this name already exists.")
+        return member
 
 
 # select form

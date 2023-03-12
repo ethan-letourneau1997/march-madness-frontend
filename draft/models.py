@@ -7,8 +7,12 @@ from django.db import models
 class Group(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=50)
+    draft_active = models.BooleanField(default=True)
     draft_order = ArrayField(models.IntegerField(
         null=True, blank=True), default=list)
+    last_draft_pick = models.IntegerField(null=True, blank=True, default=None)
+    last_person_picking = models.IntegerField(
+        null=True, blank=True, default=None)
 
     @property
     def round_length(self):

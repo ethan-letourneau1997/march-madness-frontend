@@ -7,6 +7,7 @@
 
 {% block body %}
 <div class="container group-container">
+    {% if group.draft_active %}
     <div class="row text-center">
         <span>Here is your group!</span>
     </div>
@@ -23,10 +24,24 @@
     <div class="row">
         <div class="col">
              <div class="d-flex justify-content-center">
+                
                 <a class="btn btn-lg btn-outline-danger shadow" href="{% url 'draft' group.id %}">Go To Draft</a>
             </div>
-        </div>
+        </div> 
     </div>
+    {% else %}
+    <div class="row">
+        {% for person in group.peoples.all %}
+            <div class="col">
+                <ul> {{ person.name }}
+                    {% for player in person.players.all %}
+                        <li>{{ player.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 </div>
     
 {% endblock body %}

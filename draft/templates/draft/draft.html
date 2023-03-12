@@ -10,7 +10,7 @@
 
 <div class="container draft-container text-center">
     
-    <p class="draft-day-announcement">It's draft day for <span class="accent">{{ group.name }}</span> !</p>
+    {% if group.draft_active %}
     <p class="round shadow"> Round {{ round }} </p>
     <p class="player-title">
         <span class="accent">
@@ -18,15 +18,22 @@
         </span>: Choose a player!
     </p>
 
+
     <div class="row">
         <div class="col form-col d-flex justify-content-center">
                 {% crispy select %}
         </div>  
     </div>
-    <select class="player-select2" name="state">
-        <option value="AL">Alabama</option>
-        <option value="WY">Wyoming</option>
-    </select>
+    {% else %}
+    <p>Draft Results</p>
+    {% endif %}
+    {% if group.last_draft_pick %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit" name="undo">Undo Last Pick</button>
+        </form>
+    {% endif %}
+    
     <div class="row">
         <div class="wrapper">
         {% for person in draft_order %}

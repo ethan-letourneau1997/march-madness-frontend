@@ -31,6 +31,7 @@ def index(request):
 
 
 def new_draft(request):
+    form_errors = None
     if request.method == 'POST':
         form = newGroupForm(request.POST)
         if form.is_valid():
@@ -50,7 +51,6 @@ def new_draft(request):
                     # Add member ID to draft_order
                     member_id = People.objects.get(name=member_name).id
                     draft_order.append(member_id)
-                    print(f'draft order{draft_order}')
 
             # Randomize draft order
             random.shuffle(draft_order)
@@ -64,9 +64,12 @@ def new_draft(request):
 
             # Redirect to a success page
             return redirect('group', group_id=group.id)
+        else:
+            form_errors = form.errors
     context = {
         'form': newGroupForm(),
-        'groups': Group.objects.all()
+        'groups': Group.objects.all(),
+        'form_errors': form_errors,
     }
     return render(request, "draft/new_draft.html", context)
 
@@ -74,8 +77,6 @@ def new_draft(request):
 def group(request, group_id):
 
     group = Group.objects.get(id=group_id)
-    for person in People.objects.filter(group_id=group_id):
-        print(person.player_count)
 
     draft_order = []
 
@@ -128,7 +129,35 @@ def draft(request, group_id):
 
     draft_round += 1
 
+    if draft_round < 11:
+        group.draft_active = True
+    else:
+        group.draft_active = False
+
+    group.save()  # save draft_active status for group to the database
+
     if request.method == 'POST':
+
+        if 'undo' in request.POST:
+
+            # assuming you have the ID of the player to remove and the ID of the people object
+            player_id = group.last_draft_pick  # replace with the ID of the player to remove
+            # replace with the ID of the people object
+            people_id = group.last_person_picking
+
+            # retrieve the player and people objects
+            player = Player.objects.get(id=player_id)
+            people = People.objects.get(id=people_id)
+
+            # remove the player from the people object
+            people.players.remove(player)
+
+            group.last_draft_pick = None
+            group.last_person_picking = None
+            group.save()
+
+            return redirect('draft', group_id=group_id)
+
         # Handle form submission
         form = PlayerSelectForm(
             group_id=group_id, remaining_players=remaining_players, data=request.POST)
@@ -138,6 +167,12 @@ def draft(request, group_id):
             # Add the chosen player to the list
             player_id = form.cleaned_data['player'].id
             current_member.players.add(player_id)
+
+            # save last draft pick
+
+            group.last_draft_pick = player_id
+            group.last_person_picking = current_member.id
+            group.save()
 
             # Redirect to the same page to avoid form resubmission on refresh
             return redirect('draft', group_id=group_id)
