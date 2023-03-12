@@ -1,4 +1,4 @@
-from .models import Team, Player
+from .models import Player
 from crispy_forms.layout import Layout, Submit
 from datetime import datetime
 from django import forms

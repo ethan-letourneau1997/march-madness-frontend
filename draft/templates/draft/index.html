@@ -30,7 +30,7 @@
                                 </div>
                                 {% for player in person.players.all %}
                                     <ul class="list-group list-group-flush">
-                                            <li class="list-group-item d-flex justify-content-between {% cycle 'even' 'odd' %}{% if player.team_id.knocked_out %} knocked_out{% endif %}">
+                                            <li class="list-group-item d-flex justify-content-between {% cycle 'even' 'odd' %}">
                                                 <span>{{ player }}</span>
                                                 <span>{{ player.points }}</span>
                                             </li>
@@ -61,7 +61,7 @@
                                     </div>
                                     {% for player in person.players.all %}
                                     <ul class="list-group list-group-flush">
-                                            <li class="list-group-item d-flex justify-content-between {% cycle 'even' 'odd' %}{% if player.team_id.knocked_out %} knocked_out{% endif %}">
+                                            <li class="list-group-item d-flex justify-content-between {% cycle 'even' 'odd' %}">
                                                 <span>{{ player }}</span>
                                                 <span>{{ player.points }}</span>
                                             </li>

@@ -29,8 +29,8 @@ class Player(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=50)
     points = models.IntegerField()
-    team_id = models.ForeignKey(
-        'Team', on_delete=models.CASCADE, related_name='player')
+    # team_id = models.ForeignKey(
+    #     'Team', on_delete=models.CASCADE, related_name='player')
 
     class Meta:
         managed = False
@@ -65,14 +65,14 @@ class People(models.Model):
         return f"{self.name}"
 
 
-class Team(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    name = models.CharField(max_length=50)
-    knocked_out = models.BooleanField()
+# class Team(models.Model):
+#     id = models.BigAutoField(primary_key=True)
+#     name = models.CharField(max_length=50)
+#     knocked_out = models.BooleanField()
 
-    class Meta:
-        managed = False
-        db_table = 'marchmadnessapp_team'
+#     class Meta:
+#         managed = False
+#         db_table = 'marchmadnessapp_team'
 
-    def __str__(self):
-        return f"{self.name}"
+#     def __str__(self):
+#         return f"{self.name}"

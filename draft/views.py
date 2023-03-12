@@ -6,7 +6,7 @@ from django.forms import IntegerField
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import PlayerSelectForm, newGroupForm
-from .models import Group, People, Team, Player
+from .models import Group, People, Player
 
 
 TIMEOUT = datetime.timedelta(seconds=300)
@@ -16,10 +16,10 @@ TIMEOUT = datetime.timedelta(seconds=300)
 
 def index(request):
     people = People.objects.prefetch_related(
-        'players', 'players__team_id'
+        'players'
     ).all()
     groups = Group.objects.prefetch_related(
-        'peoples', 'peoples__players', 'peoples__players__team_id'
+        'peoples', 'peoples__players'
     ).all()
 
     return render(request, "draft/index.html", {
