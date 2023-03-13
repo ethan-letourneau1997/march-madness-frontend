@@ -2,22 +2,21 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-    <h1 class="col">NEW DRAFT</h1>
+    <h2 class="col slab txt-accent">NEW DRAFT</h2>
 
     </div>
 {% endblock title %}
 
 {% block body %}
-<div class="container new-draft-container pb-4">
+<div class="container new-draft-container p-3">
     <div class="row d-flex justify-content-center">
         <div class="col-10 col-lg-8 col-xl-6">
-            {% comment %} {% crispy form %} {% endcomment %}
         <form action="new_draft" method="post">      
             {% csrf_token %}
             <div class="row">
                 <div class="col">
-                    <p class="text-center">Choose a name for your group</p>
-                    <div class="form-floating mb-3">
+                    <p class="text-center mb-3 font-md">Choose a name for your group</p>
+                    <div class="form-floating mb-4">
                         {{ form.group_name }}
                         <label for="floatingGroup">Group Name</label>
                         {% if form_errors %}
@@ -34,9 +33,9 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <p class="text-center mb-3">Add up to 10 group members</p>
+                    <p class="text-center mb-3 font-md">Add up to 10 group members</p>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 mb-3">
                     <div class="form-floating">
                         {{form.member_1}}
                         <label for="floatingMember1">Member 1</label>
@@ -52,7 +51,7 @@
                     {% endif %}
                 </div>
                 <div class="col-12 col-md-6 mb-3">
-                    <div class="form-floating ">
+                    <div class="form-floating">
                         {{form.member_2}}
                         <label for="floatingMember2">Member 2</label>
                     </div>
@@ -96,7 +95,7 @@
                         {% endfor %}
                     {% endif %}
                 </div>
-                <div class="col-12 col-md-6 ">
+                <div class="col-12 col-md-6 mb-3">
                     <div class="form-floating ">
                         {{form.member_5}}
                         <label for="floatingMember5">Member 5</label>

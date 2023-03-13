@@ -129,6 +129,8 @@ def draft(request, group_id):
 
     draft_round += 1
 
+    print(draft_round)
+
     if draft_round < 11:
         group.draft_active = True
     else:
@@ -192,6 +194,11 @@ def draft(request, group_id):
     # get first half of draft array
     mid_index = len(draft_order) // 2
     first_half = draft_order[:mid_index]
+
+    # pre fetch to reduce page load
+    people = People.objects.prefetch_related(
+        'players'
+    ).all()
 
     context = {
         'group': group,

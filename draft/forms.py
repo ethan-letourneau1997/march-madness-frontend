@@ -16,57 +16,57 @@ from .models import People, Player, Group
 class newGroupForm(forms.Form):
     group_name = forms.CharField(
         widget=forms.TextInput(
-            attrs={'id': 'floatingName', 'class': 'form-control', 'placeholder': 'group'})
+            attrs={'id': 'floatingName', 'class': 'form-control form-input', 'placeholder': 'group'})
     )
     member_1 = forms.CharField(
         required=False,
         widget=forms.TextInput(
-            attrs={'id': 'floatingMember1', 'class': 'form-control', 'placeholder': 'member1'})
+            attrs={'id': 'floatingMember1', 'class': 'form-control form-input', 'placeholder': 'member1'})
     )
     member_2 = forms.CharField(
         required=False,
         widget=forms.TextInput(
-            attrs={'id': 'floatingMember2', 'class': 'form-control', 'placeholder': 'group member 2'})
+            attrs={'id': 'floatingMember2', 'class': 'form-control form-input', 'placeholder': 'group member 2'})
     )
     member_3 = forms.CharField(
         required=False,
         widget=forms.TextInput(
-            attrs={'id': 'floatingMember3', 'class': 'form-control', 'placeholder': 'member 3'})
+            attrs={'id': 'floatingMember3', 'class': 'form-control form-input', 'placeholder': 'member 3'})
     )
     member_4 = forms.CharField(
         required=False,
         widget=forms.TextInput(
-            attrs={'id': 'floatingMember4', 'class': 'form-control', 'placeholder': 'member 4'})
+            attrs={'id': 'floatingMember4', 'class': 'form-control form-input', 'placeholder': 'member 4'})
     )
     member_5 = forms.CharField(
         required=False,
         widget=forms.TextInput(
-            attrs={'id': 'floatingMember5', 'class': 'form-control', 'placeholder': 'member1'})
+            attrs={'id': 'floatingMember5', 'class': 'form-control form-input', 'placeholder': 'member1'})
     )
     member_6 = forms.CharField(
         required=False,
         widget=forms.TextInput(
-            attrs={'id': 'floatingMember6', 'class': 'form-control', 'placeholder': 'member1'})
+            attrs={'id': 'floatingMember6', 'class': 'form-control form-input', 'placeholder': 'member1'})
     )
     member_7 = forms.CharField(
         required=False,
         widget=forms.TextInput(
-            attrs={'id': 'floatingMember7', 'class': 'form-control', 'placeholder': 'member1'})
+            attrs={'id': 'floatingMember7', 'class': 'form-control form-input', 'placeholder': 'member1'})
     )
     member_8 = forms.CharField(
         required=False,
         widget=forms.TextInput(
-            attrs={'id': 'floatingMember8', 'class': 'form-control', 'placeholder': 'member1'})
+            attrs={'id': 'floatingMember8', 'class': 'form-control form-input', 'placeholder': 'member1'})
     )
     member_9 = forms.CharField(
         required=False,
         widget=forms.TextInput(
-            attrs={'id': 'floatingMember9', 'class': 'form-control', 'placeholder': 'member9'})
+            attrs={'id': 'floatingMember9', 'class': 'form-control form-input', 'placeholder': 'member9'})
     )
     member_10 = forms.CharField(
         required=False,
         widget=forms.TextInput(
-            attrs={'id': 'floatingMember10', 'class': 'form-control', 'placeholder': 'member10'})
+            attrs={'id': 'floatingMember10', 'class': 'form-control form-input', 'placeholder': 'member10'})
     )
 
     def clean_group_name(self):
@@ -159,20 +159,20 @@ class newGroupForm(forms.Form):
 
 
 # select form
-
-
 class PlayerSelectForm(forms.Form):
     player = forms.ModelChoiceField(queryset=Player.objects.none())
     group_id = forms.IntegerField(widget=forms.HiddenInput(), required=False)
 
     def __init__(self, remaining_players, group_id, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['player'].queryset = remaining_players
+        self.fields['player'].queryset = remaining_players.select_related(
+            'team_id')
         self.fields['group_id'].initial = group_id
         self.helper = FormHelper(self)
+        self.fields['player'].label_from_instance = lambda obj: obj.__str__()
         self.helper.form_action = reverse_lazy(
             'draft', kwargs={'group_id': group_id})
-        self.helper.form_class = 'player-form'
+        self.helper.form_class = 'player-form w-100'
         self.helper.form_show_labels = False
         self.helper.form_method = 'POST'
         self.helper.layout = Layout(

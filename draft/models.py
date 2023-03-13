@@ -1,7 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
-# Create your models here.
+# Create your models here. d
 
 
 class Group(models.Model):
@@ -18,9 +18,6 @@ class Group(models.Model):
     def round_length(self):
         return len(self.draft_order)
 
-    class Meta:
-        db_table = 'marchmadnessapp_group'
-
     def __str__(self):
         return f"{self.name}"
 
@@ -29,15 +26,12 @@ class Player(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=50)
     points = models.IntegerField()
+    player_id = models.CharField(max_length=50, null=True, blank=True)
     team_id = models.ForeignKey(
         'Team', on_delete=models.CASCADE, related_name='player', blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'marchmadnessapp_player'
-
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.name} - {self.team_id.name}"
 
 
 class People(models.Model):
@@ -57,10 +51,6 @@ class People(models.Model):
     def player_count(self):
         return self.players.all().count()
 
-    class Meta:
-        managed = False
-        db_table = 'draft_people'
-
     def __str__(self):
         return f"{self.name}"
 
@@ -69,10 +59,6 @@ class Team(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=50)
     knocked_out = models.BooleanField()
-
-    class Meta:
-        managed = False
-        db_table = 'marchmadnessapp_team'
 
     def __str__(self):
         return f"{self.name}"
