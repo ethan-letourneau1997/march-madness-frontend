@@ -59,6 +59,7 @@ class Team(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=50)
     knocked_out = models.BooleanField()
+    team_id = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return f"{self.name}"

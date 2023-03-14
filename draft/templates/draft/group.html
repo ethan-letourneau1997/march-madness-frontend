@@ -8,17 +8,17 @@
 <div class="container">
     {% if group.draft_active %}
     <div class="row d-flex justify-content-center">
-        <div class="col col-lg-6 col-md-8 d-flex justify-content-center">
-            <div class="card bg-dark text-center bg-black rounded shadow-sm w-75">
-                <div class="card-header bg-light text-dimmed">
+        <div class="col col-lg-5 col-md-8 d-flex justify-content-center">
+            <div class=" text-center bg-light rounded shadow-sm w-75">
+                <div class="card-header bg-blue text-dimmed">
                     Your group has been created!
                 </div>
                 <div class="card-body pb-5">
-                    <h3 class="card-title pb-2">Draft Order</h3>
+                    <h4 class="card-title pb-2">Draft Order</h4>
                     <hr class="p-0 m-2">
                     <ul class="list-group list-group-flush list-group-numbered">
                         {% for player in draft_order %}
-                            <li class="list-group-item bg-black   text-white p-3 border-0 font-md">{{ player }}</li>
+                            <li class="list-group-item bg-light   text-white p-3 border-0 font-md">{{ player }}</li>
                         {% endfor %}
                     </ul>
                  
@@ -32,28 +32,30 @@
     {% else %}
     <div class="row">
         {% for person in group.peoples.all %}
-                        <div class="col col-12 col-sm-6 col-md-4 col-lg-3 p-3">
-                            <div class="card shadow bg-med">
-                                <div class="card-header bg-accent p-2">
-                                    <p class="fw-700 d-flex justify-content-center"> {{ person.name }} </p>
+            <div class="col col-12 col-sm-6 col-md-4 col-lg-3 p-3">
+                <div class="card border-dark bg-med">
+                    <div class="card-header ncaa">
+                        <p class=" fw-500 d-flex justify-content-center"> {{ person.name }} </p>
+                    </div>
+                    <ul class="list-group list-group-flush bg-med">
+                        {% for player in person.players.all %}
+                            <li class="txt-white list-group-item d-flex justify-content-between bg-med {% cycle 'even' 'odd' %}">
+                                <div>
+                                    <img class="img-fluid" src="https://s3-us-west-2.amazonaws.com/static.fantasydata.com/logos/ncaa/{{player.team_id.team_id}}.png" alt=""> 
+                                    
+                                    <span class="px-3 fw-400">{{ player.name }}</span>
                                 </div>
-                                {% for player in person.players.all %}
-                                    <ul class="list-group list-group-flush bg-med">
-                                            <li class="txt-white list-group-item d-flex justify-content-between bg-med {% cycle 'even' 'odd' %}">
-                                                <span>{{ player.name }}</span>
-                                                <span>{{ player.points }}</span>
-                                            </li>
-                                    {% endfor %}
-                                    </ul>
-                                <ul class="list-group list-group-flush">
-                                    <li class="bg-black list-group-item d-flex justify-content-between total-row point-total">
-                                        <p class="txt-white fw-500" scope="row">Total Points: </p>
-                                        <p class="txt-white fw-500">{{ person.total_points }}</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    {% endfor %}
+                                <span class="fw-400">{{ player.points }}</span>
+                            </li>
+                        {% endfor %}
+                            <li class="   list-group-item d-flex justify-content-between total-row point-total">
+                                <span class="px-2 txt-white fw-500" scope="row">Total Points: </span>
+                                <p class="txt-white fw-500">{{ person.total_points }}</p>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
     </div>
     {% endif %}
 </div>

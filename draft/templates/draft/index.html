@@ -24,23 +24,25 @@
                 <div class="row pt-4">
                     {% for person in people|sort_by_total_points %}
                         <div class="col col-12 col-sm-6 col-md-4 col-lg-3 p-3">
-                            <div class="card shadow bg-med">
-                                <div class="card-header bg-accent p-2">
-                                    <p class="fw-700 d-flex justify-content-center"> {{ person.name }} </p>
+                            <div class="card border-dark bg-med">
+                                <div class="card-header ncaa">
+                                    <p class=" fw-500 d-flex justify-content-center"> {{ person.name }} </p>
                                 </div>
-                                {% for player in person.players.all %}
-                                    <ul class="list-group list-group-flush bg-med">
-                                            <li class="txt-white list-group-item d-flex justify-content-between bg-med {% cycle 'even' 'odd' %}">
-                                                <span>{{ player.name }}</span>
-                                                <span>{{ player.points }}</span>
-                                            </li>
+                                <ul class="list-group list-group-flush bg-med">
+                                    {% for player in person.players.all %}
+                                        <li class="txt-white list-group-item d-flex justify-content-between bg-med {% cycle 'even' 'odd' %}">
+                                            <div>
+                                                <img class="img-fluid" src="https://s3-us-west-2.amazonaws.com/static.fantasydata.com/logos/ncaa/{{player.team_id.team_id}}.png" alt=""> 
+                                                
+                                                <span class="px-3 fw-400">{{ player.name }}</span>
+                                            </div>
+                                            <span class="fw-400">{{ player.points }}</span>
+                                        </li>
                                     {% endfor %}
-                                    </ul>
-                                <ul class="list-group list-group-flush">
-                                    <li class="bg-black list-group-item d-flex justify-content-between total-row point-total">
-                                        <p class="txt-white fw-500" scope="row">Total Points: </p>
-                                        <p class="txt-white fw-500">{{ person.total_points }}</p>
-                                    </li>
+                                        <li class="   list-group-item d-flex justify-content-between total-row point-total">
+                                            <span class="px-2 txt-white fw-500" scope="row">Total Points: </span>
+                                            <p class="txt-white fw-500">{{ person.total_points }}</p>
+                                        </li>
                                 </ul>
                             </div>
                         </div>
@@ -55,27 +57,29 @@
                     {% if group.peoples.all %}
                         {% for person in group.peoples.all|sort_by_total_points %}
                         <div class="col col-12 col-sm-6 col-md-4 col-lg-3 p-3">
-                            <div class="card shadow bg-med">
-                                <div class="card-header bg-accent p-2">
-                                    <p class="fw-700 d-flex justify-content-center"> {{ person.name }} </p>
+                            <div class="card border-dark shadow bg-med">
+                                <div class="card-header ncaa">
+                                    <p class=" fw-700 d-flex justify-content-center"> {{ person.name }} </p>
                                 </div>
-                                {% for player in person.players.all %}
-                                    <ul class="list-group list-group-flush bg-med">
-                                            <li class="txt-white list-group-item d-flex justify-content-between bg-med {% cycle 'even' 'odd' %}">
-                                                <span>{{ player.name }}</span>
-                                                <span>{{ player.points }}</span>
-                                            </li>
+                                <ul class="list-group list-group-flush bg-med">
+                                    {% for player in person.players.all %}
+                                        <li class=" txt-white list-group-item d-flex justify-content-between bg-med {% cycle 'even' 'odd' %}">
+                                            <div>
+                                                <img class="img-fluid" src="https://s3-us-west-2.amazonaws.com/static.fantasydata.com/logos/ncaa/{{player.team_id.team_id}}.png" alt=""> 
+                                                
+                                                <span class="px-3 fw-400">{{ player.name }}</span>
+                                            </div>
+                                            <span class="fw-400">{{ player.points }}</span>
+                                        </li>
                                     {% endfor %}
-                                    </ul>
-                                <ul class="list-group list-group-flush">
-                                    <li class="bg-black list-group-item d-flex justify-content-between total-row point-total">
-                                        <p class="txt-white fw-500" scope="row">Total Points: </p>
-                                        <p class="txt-white fw-500">{{ person.total_points }}</p>
-                                    </li>
+                                        <li class="   list-group-item d-flex justify-content-between total-row point-total">
+                                            <span class="px-2 txt-white fw-500" scope="row">Total Points: </span>
+                                            <p class="txt-white fw-500">{{ person.total_points }}</p>
+                                        </li>
                                 </ul>
                             </div>
                         </div>
-                    {% endfor %}
+                        {% endfor %}
                     {% else %}
                             <p>No people found for this group</p>
                     {% endif %}

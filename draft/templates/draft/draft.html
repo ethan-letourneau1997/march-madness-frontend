@@ -11,14 +11,13 @@
 <div class="container-fluid draft-container text-center pb-4">
     
     {% if group.draft_active %}
-    {% comment %} <p class="round shadow bg-black p-2 rounded"> Round {{ round }} </p> {% endcomment %}
-    <div class="justify-content-center gap-3 player-title d-flex round shadow bg-black p-2 rounded">
-        <p class="txt-accent d-inline font-lg">
+    <div class="justify-content-center gap-3 player-title d-flex round bg-light p-2 rounded">
+        <p class="txt-accent fw-600 d-inline font-lg">
             {{ current_turn.name }}
         </p> 
-        <p class="d-inline fw-200 font-lg">choose a player!</p> 
+        <p class="d-inline fw-200 font-lg ">choose a player!</p> 
     </div>
-    <div class="row mb-0 mt-4">
+    <div class="row mb-0 mt-5">
         <div class="col-2  col-lg-4"></div>
         <div class="col-8 col-lg-4 form-col d-flex justify-content-center">
                 {% crispy select %}
@@ -28,7 +27,7 @@
                 <form action="" method="post">
                     {% csrf_token %}
                     
-                        <button class="undo btn btn-outline-light btn-sm mb-3" type="submit" name="undo" > <span class="d-none d-md-inline">Undo</span>  &nbsp;<i class="fa-solid fa-rotate-left"></i></button>       
+                        <button class="undo btn-sm btn btn-outline-light btn mb-3" type="submit" name="undo" > <span class="d-none d-md-inline">Undo</span>  &nbsp;<i class="fa-solid fa-rotate-left"></i></button>       
                 </form>
             {% endif %}
         </div>
@@ -40,6 +39,7 @@
     
 
     <div class="row px-3">
+
     {% for person in draft_order %}
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
             <div class="card bg-med shadow mt-4">
@@ -48,14 +48,17 @@
                         <p class="font-md fw-500">{{person}}</p>
                     </div>   
                 {% else %}
-                    <div class="card-header bg-med">
+                    <div class="card-header bg-light">
                         <p class="font-md">{{person}}</p>
                     </div>
                 {% endif %}
-                <div class="card-body bg-light ">
+                <div class="card-body bg-med ">
                     <ul class="list-group list-group-flush list-group-numbered flex-column align-items-start">
                         {% for player in person.players.all %}
-                            <li class="list-group-item bg-light txt-white "> {{ player.name }} </li>  
+                            <li class="list-group-item bg-med txt-white height w-100 d-flex justify-between align-items-center">
+                                <span class="px-2">{{ player.name }} </span> 
+                                <img class="img-fluid" src="https://s3-us-west-2.amazonaws.com/static.fantasydata.com/logos/ncaa/{{player.team_id.team_id}}.png" alt=""> 
+                            </li>  
                         {% endfor %}
                     </ul>
                 </div>

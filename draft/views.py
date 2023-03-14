@@ -129,8 +129,6 @@ def draft(request, group_id):
 
     draft_round += 1
 
-    print(draft_round)
-
     if draft_round < 11:
         group.draft_active = True
     else:

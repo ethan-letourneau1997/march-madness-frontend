@@ -29,36 +29,36 @@
 </head>
 <body class="body">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-darkest">
-  <div class="container-fluid">
-    <a class="navbar-brand slab txt-accent" href="#"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active fw-500{% endif %}" aria-current="page" href="{% url 'index' %}">Home</a>
-        </li>
-        <li class="nav-item {% if url_name == 'new_draft' %}active{% endif %}">
-          <a  class="nav-link {% if request.resolver_match.url_name == 'new_draft' %}active fw-500{% endif %}" href="{% url 'new_draft' %}">New Draft</a>
-        </li>
-        <li class="nav-item dropdown {% if url_name == 'group' %}active{% endif %}">
-          <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'group' %}active fw-500{% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Groups
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            {% for group in groups %}
-                <li>
-                    <a class="dropdown-item" href="{% url 'group' group.id%}"> {{ group.name }} </a>
-                </li>
-            {% endfor %}
-          </ul>
-        </li>
-      </ul>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-darkest">
+    <div class="container-fluid">
+      <a class="navbar-brand slab txt-accent" href="#"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active fw-500{% endif %}" aria-current="page" href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="nav-item {% if url_name == 'new_draft' %}active{% endif %}">
+            <a  class="nav-link {% if request.resolver_match.url_name == 'new_draft' %}active fw-500{% endif %}" href="{% url 'new_draft' %}">New Draft</a>
+          </li>
+          <li class="nav-item dropdown {% if url_name == 'group' %}active{% endif %}">
+            <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'group' %}active fw-500{% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Groups
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for group in groups %}
+                  <li>
+                      <a class="dropdown-item" href="{% url 'group' group.id%}"> {{ group.name }} </a>
+                  </li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
 
 <div class="container">
@@ -87,8 +87,8 @@
         </script>
         <script>
             $(".js-example-responsive").select2({
-    width: 'resolve' // need to override the changed default
-});
+            width: 'resolve' // need to override the changed default
+        });
         </script>
         <script>
     $(document).ready(function() {

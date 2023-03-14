@@ -172,7 +172,7 @@ class PlayerSelectForm(forms.Form):
         self.fields['player'].label_from_instance = lambda obj: obj.__str__()
         self.helper.form_action = reverse_lazy(
             'draft', kwargs={'group_id': group_id})
-        self.helper.form_class = 'player-form w-100'
+        self.helper.form_class = 'player-form elect-input'
         self.helper.form_show_labels = False
         self.helper.form_method = 'POST'
         self.helper.layout = Layout(
@@ -182,7 +182,7 @@ class PlayerSelectForm(forms.Form):
             ),
             FormActions(
                 Submit('submit', 'Add Player',
-                       css_class='shadow btn btn-outline-danger mx-auto d-block w-100 mt-2')
+                       css_class='shadow btn btn-outline-danger mx-auto d-block w-75 mt-2')
             )
         )
 
