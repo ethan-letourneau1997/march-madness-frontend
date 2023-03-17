@@ -6,21 +6,24 @@ from django.forms import IntegerField
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import PlayerSelectForm, newGroupForm
-from .models import Group, People, Player
+from .models import Group, People, Player, Team
+
+from django.views.decorators.cache import cache_control
 
 
-TIMEOUT = datetime.timedelta(seconds=300)
-
-
+# set cache expiration time to 1 hour (3600 seconds)
+@cache_control(max_age=3600)
 # Create your views here.
-
 def index(request):
+
     people = People.objects.prefetch_related(
         'players'
     ).all()
     groups = Group.objects.prefetch_related(
         'peoples', 'peoples__players'
     ).all()
+
+    teams = Team.objects.all()
 
     return render(request, "draft/index.html", {
         # 'people': People.objects.all(),
