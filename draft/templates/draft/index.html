@@ -32,9 +32,10 @@
                                 <ul class="list-group list-group-flush bg-med">
                                     {% for player in person.players.all %}
                                         <li class="txt-white list-group-item d-flex justify-content-between bg-med {% cycle 'even' 'odd' %}">
-                                            <div>
-                                                <img src="{% static 'draft/logos/' %}{{ player.team_id.team_id }}.webp" />
-                                                <span class="px-3 fw-400">{{ player.name }}</span>
+                                           <div>
+                                            <img src="{% static 'draft/logos/'|add:player.team_id.team_id|add:'.webp' %}" alt="{{ player.team_id.team_name }} logo" loading="lazy" >
+                                                <span class="px-3 fw-400">
+                                                     {{ player.name }}</span>
                                             </div>
                                             <span class="fw-400">{{ player.points }}</span>
                                         </li>
@@ -65,13 +66,7 @@
                                     {% for player in person.players.all %}
                                         <li class=" txt-white list-group-item d-flex justify-content-between bg-med {% cycle 'even' 'odd' %}">
                                             <div>
-                                                <img src="{% static 'draft/logos/' %}{{ player.team_id.team_id }}.webp" />
-                                                {% comment %} <svg width="27" height="27">
-                                                    <image xlink:href="{% static 'draft/svg/ecu.webp'  %}" width="27" height="27" />
-                                                 </svg> {% endcomment %}
-
-
-                                                
+                                                 <img src="{% static 'draft/logos/'|add:player.team_id.team_id|add:'.webp' %}" alt="{{ player.team_id.team_name }} logo" loading="lazy" >
                                                 <span class="px-3 fw-400">{{ player.name }}</span>
                                             </div>
                                             <span class="fw-400">{{ player.points }}</span>
