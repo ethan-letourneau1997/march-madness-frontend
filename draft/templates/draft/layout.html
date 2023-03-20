@@ -51,7 +51,7 @@
             <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active fw-500{% endif %}" aria-current="page" href="{% url 'index' %}">Home</a>
           </li>
           <li class="nav-item {% if url_name == 'new_draft' %}active{% endif %}">
-            <a  class="nav-link {% if request.resolver_match.url_name == 'new_draft' %}active fw-500{% endif %}" href="{% url 'new_draft' %}">New Draft</a>
+            <a  class="nav-link disabled {% if request.resolver_match.url_name == 'new_draft' %}active fw-500{% endif %}" href="{% url 'new_draft' %}">New Draft</a>
           </li>
           <li class="nav-item dropdown {% if url_name == 'group' %}active{% endif %}">
             <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'group' %}active fw-500{% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
