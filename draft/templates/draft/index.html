@@ -31,13 +31,13 @@
                                 </div>
                                 <ul class="list-group list-group-flush bg-med">
                                     {% for player in person.players.all %}
-                                        <li class="txt-white list-group-item d-flex justify-content-between bg-med {% cycle 'even' 'odd' %}">
+                                        <li class=" list-group-item d-flex justify-content-between bg-med {% cycle 'even' 'odd' %}">
                                            <div>
                                             <img src="{% static 'draft/logos/'|add:player.team_id.team_id|add:'.webp' %}" alt="{{ player.team_id.team_name }} logo" loading="lazy" >
-                                                <span class="px-3 fw-400">
+                                                <span class="px-3 fw-400 {% cycle 'even' 'odd' %}{% if player.team_id.knocked_out %} eliminated {% endif %}">
                                                      {{ player.name }}</span>
                                             </div>
-                                            <span class="fw-400">{{ player.points }}</span>
+                                            <span class="fw-400 {% if player.team_id.knocked_out %} eliminated {% endif %}">{{ player.points }}</span>
                                         </li>
                                     {% endfor %}
                                         <li class="   list-group-item d-flex justify-content-between total-row point-total">
@@ -67,13 +67,13 @@
                                         <li class=" txt-white list-group-item d-flex justify-content-between bg-med {% cycle 'even' 'odd' %}">
                                             <div>
                                                  <img src="{% static 'draft/logos/'|add:player.team_id.team_id|add:'.webp' %}" alt="{{ player.team_id.team_name }} logo" loading="lazy" >
-                                                <span class="px-3 fw-400">{{ player.name }}</span>
+                                                <span class="px-3 fw-400 {% if player.team_id.knocked_out %} eliminated {% endif %}">{{ player.name }}</span>
                                             </div>
                                             <span class="fw-400">{{ player.points }}</span>
                                         </li>
                                     {% endfor %}
-                                        <li class="   list-group-item d-flex justify-content-between total-row point-total">
-                                            <span class="px-2 txt-wsouite fw-500" scope="row">Total Points: </span>
+                                        <li class="   list-group-item d-flex justify-content-between total-row point-total {% if player.team_id.knocked_out %} eliminated {% endif %}">
+                                            <span class="px-2 txt-white fw-500" scope="row">Total Points: </span>
                                             <p class="txt-white fw-500">{{ person.total_points }}</p>
                                         </li>
                                 </ul>
